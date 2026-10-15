@@ -2,10 +2,14 @@ package com.example.praktikum5
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,12 +30,31 @@ fun FormDataDiri(modifier: Modifier){
 
     Column(modifier = Modifier.padding(top=50.dp),
     verticalArrangement = Arrangement.Top,
-    horizontalAligment = Alignment.CenterHorizontally) {
+    horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(
             value = textNama,
             singleLine = true,
             shape = MaterialTheme.shapes.large,
-            modifier = Modifier.width(250.dp)
+            modifier = Modifier.width(250.dp),
+            label = {Text(text = "Nama Lengkap")},
+            onValueChange = {
+                textNama = it
+            }
         )
+        Row{
+            gender.forEach { item ->
+                Row(modifier = Modifier.selectable(
+                    selected = textJK == item,
+                    onClick = {textJK = item}
+                ), verticalAlignment = Alignment.CenterHorizontally) {
+                    RadioButton(
+                        selected = textJK == item,
+                        onClick = {
+
+                        }
+                    )
+                }
+            }
+        }
     }
 }
